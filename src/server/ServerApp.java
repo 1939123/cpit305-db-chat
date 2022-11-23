@@ -56,12 +56,42 @@ public class ServerApp {
     }
 
     private static String getFullName(String username) {
-        // TODO: get user's name from database using his username 
+        // TODO: get user's name from database using his username
+        try{ 
+        String queryString = "SELECT * FROM users";
+            ResultSet results = Statement.executeQuery(queryString);
+        while (results.next()) {
+           String username = results.getString("sname");
+           if ((username.equals(username)){
+               String fullname = results.getString("name");
+           } }
+         results.close();
+ }catch (SQLException sql) {
+
+            out.println(sql);}
         return "Sample Name";
     }
 
     private static boolean checkLogin(String username, String password) {
-        // TODO: check database for username and password
+         try {
+            String queryString = "SELECT sName, Pwd FROM users";
+            ResultSet results = Statement.executeQuery(queryString);
+
+            while (results.next()) {
+            String username = results.getString("sname");
+            String userpassword =  results.getString("SPwd");
+
+               if ((username.equals(username)) && (password.equals(userpassword))) {
+
+                  JOptionPane.showMessageDialog(null, "Username and Password exist");  
+            }else {
+
+             //JOptionPane.showMessageDialog(null, "Please Check Username and Password ");
+            } }
+            results.close();
+        } catch (SQLException sql) {
+
+            out.println(sql);}
         return true;
-    }
+    
 }
